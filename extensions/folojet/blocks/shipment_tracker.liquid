@@ -1,0 +1,61 @@
+<link href="https://unpkg.com/swiper@7/swiper-bundle.min.css" rel="stylesheet"/>
+
+<script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+
+<div class="wrapper">
+    <div>
+        {% if block.settings.show_banner == true %}
+            <img
+                src="{{ block.settings.desktop_banner | image_url: width: 1024 }}"
+                loading="lazy" width="100%"
+                class="desktop-top-banner banner"
+                
+            >
+       
+            <img
+                src="{{ block.settings.mobile_banner | image_url: width: 480 }}"
+                loading="lazy" width="100%"
+                class="mobile-top-banner banner"
+            >
+        {% endif %}
+    </div>
+</div>
+
+<div id="root">
+  {% liquid
+    # Relative to entrypointsDir
+    render 'vite-tag' with 'theme.css'
+    render 'vite-tag' with 'theme.jsx'
+  %}
+</div>
+
+<div id="trackingComponent" class="tracking-info"></div>
+</div>
+
+
+{% schema %}
+    {
+        "name": "Shipment Tracker",
+        "target": "section",
+        "stylesheet": "shipment_tracker.css",
+        "javascript": "shipment_tracker.js",
+        "settings": [
+            {
+                "type": "checkbox",
+                "id": "show_banner",
+                "label": "Show banner",
+                "default": true
+            },
+            {
+                "type": "image_picker",
+                "id": "desktop_banner",
+                "label": "Desktop banner"
+            },
+            {
+                "type": "image_picker",
+                "id": "mobile_banner",
+                "label": "Mobile banner"
+            }
+        ]
+    }
+{% endschema %}
